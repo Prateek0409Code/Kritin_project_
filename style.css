@@ -1,0 +1,49 @@
+#exercise-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#exercise-form input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+#save-exercise-btn {
+  display: block;
+  margin-top: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#exercise-reminder {
+  display: none;
+  text-align: center;
+}
+
+#exercise-reminder h2 {
+  margin-top: 0;
+}
+
+#exercise-reminder p {
+  margin-bottom: 20px;
+}
+
+#done-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#exercise-tracking {
+  display: none;
+}
+
+#exercise-tracking h2 {
+  margin-top: 0;
+}

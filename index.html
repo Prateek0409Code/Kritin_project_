@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<div id="exercise-form">
+  <h2>Exercise Reminder</h2>
+  <label for="exercise-type">Exercise Type:</label>
+  <input type="text" id="exercise-type" name="exercise-type" required>
+  <label for="exercise-duration">Duration:</label>
+  <input type="text" id="exercise-duration" name="exercise-duration" required>
+  <label for="exercise-frequency">Frequency:</label>
+  <input type="text" id="exercise-frequency" name="exercise-frequency" required>
+  <button id="save-exercise-btn">Save</button>
+</div>
+
+<div id="exercise-reminder">
+  <h2>Time to Exercise!</h2>
+  <p>Don't forget to complete your exercise routine:</p>
+  <p><span id="exercise-type-reminder"></span> for <span id="exercise-duration-reminder"></span></p>
+  <button id="done-btn">Done</button>
+</div>
+
+<div id="exercise-tracking">
+  <h2>Exercise Progress</h2>
+  <p>You've completed <span id="exercise-count"></span> exercises so far.</p>
+  <p>Your last exercise was on <span id="last-exercise-date"></span>.</p>
+</div>
+<script>
+	// Get form elements
+const exerciseType = document.getElementById('exercise-type');
+const exerciseDuration = document.getElementById('exercise-duration');
+const exerciseFrequency = document.getElementById('exercise-frequency');
+const saveExerciseBtn = document.getElementById('save-exercise-btn');
+
+// Get reminder elements
+const exerciseReminder = document.getElementById('exercise-reminder');
+const exerciseTypeReminder = document.getElementById('exercise-type-reminder');
+const exerciseDurationReminder = document.getElementById('exercise-duration-reminder');
+const doneBtn = document.getElementById('done-btn');
+
+// Get tracking elements
+const exerciseCount = document.getElementById('exercise-count');
+const lastExerciseDate = document.getElementById('last-exercise-date');
+const exerciseTracking = document.getElementById('exercise-tracking');
+
+// Save exercise routine to local storage
+saveExerciseBtn.addEventListener('click', function() {
+  localStorage.setItem('exerciseType', exerciseType.value);
+localStorage.setItem('exerciseDuration', exerciseDuration.value);
+localStorage.setItem('exerciseFrequency', exerciseFrequency.value);
+});
+
+// Check local storage for exercise routine and display reminder if applicable
+if (localStorage.getItem('exerciseType') && localStorage.getItem('exerciseDuration') && localStorage.getItem('exerciseFrequency')) {
+const exerciseTypeReminderText = localStorage.getItem('exerciseType');
+const exerciseDurationReminderText = localStorage.getItem('exerciseDuration');
+exerciseTypeReminder.innerText = exerciseTypeReminderText;
+exerciseDurationReminder.innerText = exerciseDurationReminderText;
+exerciseReminder.style.display = 'block';
+}
+
+// Mark exercise as completed and update tracking information
+doneBtn.addEventListener('click', function() {
+const now = new Date();
+const exerciseCountValue = parseInt(exerciseCount.innerText) + 1;
+const lastExerciseDateValue = now.toLocaleDateString();
+localStorage.setItem('exerciseCount', exerciseCountValue);
+localStorage.setItem('lastExerciseDate', lastExerciseDateValue);
+exerciseCount.innerText = exerciseCountValue;
+lastExerciseDate.innerText = lastExerciseDateValue;
+exerciseTracking.style.display = 'block';
+exerciseReminder.style.display = 'none';
+});
+
+// Check local storage for exercise tracking information and display if applicable
+if (localStorage.getItem('exerciseCount') && localStorage.getItem('lastExerciseDate')) {
+const exerciseCountValue = parseInt(localStorage.getItem('exerciseCount'));
+const lastExerciseDateValue = localStorage.getItem('lastExerciseDate');
+exerciseCount.innerText = exerciseCountValue;
+lastExerciseDate.innerText = lastExerciseDateValue;
+exerciseTracking.style.display = 'block';
+}
+
+</script>
+
+</body>
+</html>
